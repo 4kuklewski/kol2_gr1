@@ -17,9 +17,14 @@ class Diary(object):
 
     def load(self, file_name):
         """ Load diary from file with json """
-        file_handler = open(file_name, 'r')
+        file_handler = open(file_name, 'rw')
         json_object = file_handler.read()
-        dictionary = json.JSONDecoder().decode(json_object)
+        try:
+            dictionary = json.JSONDecoder().decode(json_object)
+        except ValueError:
+            dictionary = None
+        if dictionary is None:
+            return
         self.courses = list(dictionary['courses'])
         self.students = list()
         for student_dictionary in dictionary['students']:

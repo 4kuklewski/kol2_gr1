@@ -1,7 +1,7 @@
 import utils
 
 
-def prompt(message='', selection_range=range(0, 9), instance=int):
+def prompt(message='', selection_range=range(0, 10), instance=int):
     message += ' >>> '
     while True:
         selection = raw_input('\n' + message)
@@ -18,6 +18,7 @@ def prompt(message='', selection_range=range(0, 9), instance=int):
 
 def show_menu():
     print 'Menu'
+    print '9.', 'create sample diary (progress will be lost)'
     print
     print '1.', 'show diary'
     print
@@ -92,6 +93,8 @@ def main():
             attendance = diary.get_total_attendance(student)
             utils.pretty_print(student)
             print 'attendance (total, absences, presences): ' + str(attendance)
+        elif selection == 9:
+            diary = utils.sample_diary_factory()
         else:
             continue
         raw_input("press enter")
